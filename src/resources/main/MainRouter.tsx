@@ -1,6 +1,8 @@
+import { Route, Routes } from 'react-router-dom'
+
 import MainLayout from '@/components/layout/MainLayout'
 import ProtectedRoute from '@/utils/routes/ProtectedRoute'
-import { Route, Routes } from 'react-router-dom'
+
 import HomePage from './home/HomePage'
 
 const MainRouter = () => {

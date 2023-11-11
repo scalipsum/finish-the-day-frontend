@@ -1,6 +1,8 @@
+import { Route, Routes } from 'react-router-dom'
+
 import AuthLayout from '@/components/layout/AuthLayout'
 import AuthRoute from '@/utils/routes/AuthRoute'
-import { Route, Routes } from 'react-router-dom'
+
 import LoginPage from './login/LoginPage'
 
 const AuthRouter = () => {

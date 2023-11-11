@@ -1,5 +1,6 @@
-import { SupabaseClient, createClient } from '@supabase/supabase-js'
+import { SupabaseClient } from '@supabase/supabase-js'
 import React, { useContext, useState } from 'react'
+
 import { Database } from '../database.types'
 
 type AppContextType = {

@@ -1,5 +1,6 @@
-import { useAppContext } from '@/AppProvider'
 import { Navigate, useLocation } from 'react-router-dom'
+
+import { useAppContext } from '@/AppProvider'
 
 interface AuthRouteProps {
   children: JSX.Element
