@@ -30,7 +30,9 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
         <form>
           <div className="flex items-center justify-between space-x-2">
             <Input id="name" placeholder="Name of your task" />
-            <Button variant="outline">Add</Button>
+            <Button variant="outline" className="py-6">
+              Add
+            </Button>
           </div>
         </form>
         <TodoList categoryID={category.id} />
