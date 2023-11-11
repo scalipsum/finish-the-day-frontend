@@ -41,6 +41,10 @@ module.exports = {
     'tailwindcss/no-custom-classname': 'warn',
     'tailwindcss/no-contradicting-classname': 'error',
     'simple-import-sort/imports': 'warn',
-    'simple-import-sort/exports': 'warn'
+    'simple-import-sort/exports': 'warn',
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/no-empty-function': ['off'],
+    '@typescript-eslint/no-empty-interface': 'off'
   }
 }
