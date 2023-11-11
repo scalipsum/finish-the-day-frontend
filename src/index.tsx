@@ -1,4 +1,4 @@
-import 'custom.css'
+import 'assets/styles/custom.css'
 
 import { createRoot } from 'react-dom/client'
 
