@@ -1,23 +1,16 @@
-import { useEffect } from 'react'
+import { useGetAllCategories } from './api/useGetAllCategories'
+import CategoryCard from './components/CategoryCard'
 
 const HomePage = () => {
-  useEffect(() => {
-    const getData = async () => {
-      // const { data } = await supabase
-      //   .from('todo')
-      //   .select('id, body, is_completed, day (name), category (name)')
-      //
-      // const { data } = await supabase
-      //   .from('days_categories')
-      //   .select('day !inner(name), category (name)')
-      //   .eq('day.name', 'monday')
-      // console.log(data)
-    }
-    getData()
-    // eslint-disable-next-line
-  }, [])
+  const { categories } = useGetAllCategories()
 
-  return <div>HomePage</div>
+  return (
+    <div className="flex flex-col items-start justify-between gap-4 lg:flex-row">
+      {categories.map((category) => (
+        <CategoryCard key={category.id} category={category} />
+      ))}
+    </div>
+  )
 }
 
 export default HomePage

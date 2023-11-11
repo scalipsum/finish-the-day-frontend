@@ -16,7 +16,7 @@ const MainRouter = () => {
           </ProtectedRoute>
         }
       >
-        <Route path="/" element={<HomePage />} />
+        <Route path="/:day" element={<HomePage />} />
       </Route>
     </Routes>
   )

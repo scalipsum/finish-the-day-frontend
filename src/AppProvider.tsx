@@ -4,14 +4,14 @@ import React, { useContext, useState } from 'react'
 import { Database } from '../database.types'
 
 type AppContextType = {
-  supabase: SupabaseClient<Database, 'public'> | null
+  supabase: SupabaseClient<Database, 'public'>
   isLoggedIn: boolean
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 }
 export const AppContext = React.createContext<AppContextType>({
   isLoggedIn: false,
   setIsLoggedIn: () => {},
-  supabase: null
+  supabase: {} as SupabaseClient<Database, 'public'>
 })
 
 type AppProviderProps = {
