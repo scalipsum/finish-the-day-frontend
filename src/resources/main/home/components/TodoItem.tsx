@@ -22,7 +22,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     <label
       htmlFor={String(todo.id)}
       className={`mb-2 flex w-full cursor-pointer flex-col items-start justify-between rounded-md border border-slate-800 ${
-        isSelected ? 'bg-slate-900' : ''
+        isSelected ? 'bg-slate-900' : 'bg-transparent'
       } px-4 py-2 sm:flex-row sm:items-center`}
     >
       <div className="flex items-center space-x-4">
