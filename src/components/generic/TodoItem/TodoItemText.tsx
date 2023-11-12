@@ -1,3 +1,4 @@
+import { useAppContext } from '@/AppProvider'
 import { Input } from '@/components/ui/input'
 import TypographyP from '@/components/ui/typography/TypographyP'
 import { Tables } from '@/utils/types'
@@ -10,22 +11,39 @@ interface TodoItemTextProps {
 }
 
 const TodoItemText = ({ todo, isCompleted }: TodoItemTextProps) => {
+  const { supabase, triggerTodosRefetch } = useAppContext()
+
   const [todoState, setTodoState] = useState<'read' | 'edit'>('read')
-  const [inputValue, setInputValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string | null>(null)
+
+  const handleChangeTodoState = () => {
+    if (todoState === 'read' && !isCompleted) {
+      setInputValue(todo.body ?? '')
+      return setTodoState('edit')
+    }
+    if (todoState === 'edit') return handleUpdateTodo()
+  }
+
+  const handleUpdateTodo = async () => {
+    if (inputValue) {
+      const { error } = await supabase
+        .from('todo')
+        .update({ body: inputValue })
+        .eq('id', todo.id ?? -1)
+      if (error) return console.log('UpdateTodoError', error)
+      triggerTodosRefetch()
+      setTodoState('read')
+    }
+  }
 
   return (
     <>
       {todoState === 'read' ? (
         <div
           className={`${isCompleted ? 'line-through' : ''}`}
-          onClick={() => {
-            if (!isCompleted) {
-              setInputValue(todo.body ?? '')
-              setTodoState('edit')
-            }
-          }}
+          onClick={handleChangeTodoState}
         >
-          <TypographyP>{todo.body}</TypographyP>
+          <TypographyP>{inputValue ?? todo.body}</TypographyP>
         </div>
       ) : (
         <Input
@@ -34,7 +52,7 @@ const TodoItemText = ({ todo, isCompleted }: TodoItemTextProps) => {
           autoComplete="off"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onBlur={() => setTodoState('read')}
+          onBlur={handleChangeTodoState}
           className="w-full border-none pl-0 dark:bg-slate-900"
           onKeyDown={(e) => {
             // @ts-expect-error ts-migrate(2531).
