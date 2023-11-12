@@ -1,4 +1,4 @@
-import { SupabaseClient } from '@supabase/supabase-js'
+import { SupabaseClient, User } from '@supabase/supabase-js'
 import React, { useContext, useEffect, useState } from 'react'
 
 import { Database } from '../database.types'
@@ -10,13 +10,19 @@ type AppContextType = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
   refetchTodos: boolean
   triggerTodosRefetch: () => void
+  currentUserDetails: User | null | undefined
+  setCurrentUserDetails: React.Dispatch<
+    React.SetStateAction<User | null | undefined>
+  >
 }
 export const AppContext = React.createContext<AppContextType>({
   isLoggedIn: false,
   setIsLoggedIn: () => {},
   supabase: {} as SupabaseClient<Database, 'public'>,
   refetchTodos: true,
-  triggerTodosRefetch: () => {}
+  triggerTodosRefetch: () => {},
+  currentUserDetails: null,
+  setCurrentUserDetails: () => {}
 })
 
 type AppProviderProps = {
@@ -27,13 +33,17 @@ type AppProviderProps = {
 const AppProvider = ({ children, client }: AppProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] =
     useState<AppContextType['isLoggedIn']>(false)
+  const [currentUserDetails, setCurrentUserDetails] = useState<User | null>()
 
   // Check Auth Session
   useEffect(() => {
     const getAuthSession = async () => {
       const { data, error } = await client.auth.getSession()
       if (error) return
-      if (data.session) setIsLoggedIn(true)
+      if (data.session) {
+        setCurrentUserDetails(data.session.user)
+        setIsLoggedIn(true)
+      }
     }
     getAuthSession()
     // eslint-disable-next-line
@@ -54,7 +64,9 @@ const AppProvider = ({ children, client }: AppProviderProps) => {
         isLoggedIn,
         setIsLoggedIn,
         refetchTodos,
-        triggerTodosRefetch
+        triggerTodosRefetch,
+        currentUserDetails,
+        setCurrentUserDetails
       }}
     >
       {children}

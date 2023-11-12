@@ -90,6 +90,7 @@ export interface Database {
           id: number
           is_completed: boolean | null
           updated_at: string | null
+          user_id: string | null
         }
         Insert: {
           body: string
@@ -99,6 +100,7 @@ export interface Database {
           id?: number
           is_completed?: boolean | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Update: {
           body?: string
@@ -108,8 +110,16 @@ export interface Database {
           id?: number
           is_completed?: boolean | null
           updated_at?: string | null
+          user_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: 'fk_user'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'users'
+            referencedColumns: ['id']
+          },
           {
             foreignKeyName: 'todo_category_id_fkey'
             columns: ['category_id']

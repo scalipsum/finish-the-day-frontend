@@ -7,10 +7,11 @@ interface TodoListProps {
   dayID: number | undefined
 }
 const TodoList = ({ categoryID, dayID }: TodoListProps) => {
-  const { refetchTodos } = useAppContext()
+  const { refetchTodos, currentUserDetails } = useAppContext()
   const { todos } = useGetTodosByDayAndCategory({
     dayID,
     categoryID,
+    userID: currentUserDetails?.id,
     refetch: refetchTodos
   })
 

@@ -21,7 +21,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
   const { day } = useParams()
   const { day: apiDay } = useGetDayByName({ name: day ?? '' })
   const dayID = useMemo(() => apiDay?.id, [apiDay])
-  const { supabase, triggerTodosRefetch } = useAppContext()
+  const { supabase, triggerTodosRefetch, currentUserDetails } = useAppContext()
 
   const [inputValue, setInputValue] = useState<string>('')
 
@@ -32,7 +32,8 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       .insert({
         body: inputValue,
         category_id: category.id,
-        day_id: dayID
+        day_id: dayID,
+        user_id: currentUserDetails?.id
       })
       .single()
       .then(() => {

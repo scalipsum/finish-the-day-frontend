@@ -16,16 +16,23 @@ const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { supabase, setIsLoggedIn } = useAppContext()
+  const {
+    supabase,
+    setIsLoggedIn,
+    triggerTodosRefetch,
+    setCurrentUserDetails
+  } = useAppContext()
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     })
     if (error) return alert(error.message)
+    setCurrentUserDetails(data.user)
     setIsLoggedIn(true)
+    triggerTodosRefetch()
   }
 
   return (
