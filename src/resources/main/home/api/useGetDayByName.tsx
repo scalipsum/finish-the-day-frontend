@@ -17,7 +17,7 @@ export const useGetDayByName = ({ name }: UseGetDayByNameProps) => {
         .select()
         .eq('name', name)
       if (data) return setDay(data[0])
-      if (error) return console.log(error)
+      if (error) return console.log('GetDayByName', error)
     }
     getDayByName()
     // eslint-disable-next-line

@@ -15,11 +15,11 @@ const MainLayout = () => {
     day === 'sunday'
 
   return (
-    <div className="light:bg-gray-200 h-screen w-screen dark:bg-slate-900">
+    <div className="light:bg-gray-200 min-h-screen w-screen dark:bg-slate-900">
       <div className="flex h-36 items-center justify-center bg-indigo-900">
         <TypographyH1>{day}</TypographyH1>
       </div>
-      <div className="px-8 pt-6">
+      <div className="px-8 py-6">
         {(location.pathname === '/' || !isValidDay) && (
           <Navigate to="/monday" />
         )}

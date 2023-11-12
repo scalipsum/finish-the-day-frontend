@@ -10,7 +10,7 @@ export const useGetAllCategories = () => {
     const getData = async () => {
       const { data, error } = await supabase.from('category').select()
       if (data) setCategories(data)
-      if (error) return console.log(error)
+      if (error) return console.log('GetAllCategories', error)
     }
     getData()
     // eslint-disable-next-line

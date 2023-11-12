@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Tables } from '@/utils/types'
 import TodoList from './TodoList'
 import { Button } from '@/components/ui/button'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetDayByName } from '../api/useGetDayByName'
 import { useAppContext } from '@/AppProvider'
@@ -22,18 +22,25 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
   const { day } = useParams()
   const { day: apiDay } = useGetDayByName({ name: day ?? '' })
   const dayID = useMemo(() => apiDay?.id, [apiDay])
-  const { supabase } = useAppContext()
+  const { supabase, setRefetchTodos } = useAppContext()
 
   const [inputValue, setInputValue] = useState<string>('')
 
   const handleAddTodo = async () => {
-    const { data, error } = await supabase.from('todo').insert({
-      body: inputValue,
-      category_id: category.id,
-      day_id: dayID
-    })
-    if (data) return console.log(data)
-    if (error) return console.log(error)
+    await supabase
+      .from('todo')
+      .insert({
+        body: inputValue,
+        category_id: category.id,
+        day_id: dayID
+      })
+      .single()
+      .then(() => {
+        setInputValue('')
+        // Refetch
+        setRefetchTodos(true)
+        setTimeout(() => setRefetchTodos(false), 1000)
+      })
   }
 
   return (

@@ -10,7 +10,7 @@ export const useGetAllDays = () => {
     const getApiDays = async () => {
       const { data, error } = await supabase.from('day').select()
       if (data) return setDays(data)
-      if (error) return console.error(error)
+      if (error) return console.error('GetAllDays', error)
     }
     getApiDays()
     // eslint-disable-next-line

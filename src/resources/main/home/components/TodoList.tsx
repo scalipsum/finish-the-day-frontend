@@ -1,3 +1,4 @@
+import { useAppContext } from '@/AppProvider'
 import { useGetTodosByDayAndCategory } from '../api/useGetTodosByDayAndCategory'
 import TodoItem from './TodoItem'
 
@@ -6,7 +7,12 @@ interface TodoListProps {
   dayID: number | undefined
 }
 const TodoList = ({ categoryID, dayID }: TodoListProps) => {
-  const { todos } = useGetTodosByDayAndCategory({ dayID, categoryID })
+  const { refetchTodos } = useAppContext()
+  const { todos } = useGetTodosByDayAndCategory({
+    dayID,
+    categoryID,
+    refetch: refetchTodos
+  })
 
   return (
     <div className="mt-4">
