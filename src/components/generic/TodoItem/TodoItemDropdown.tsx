@@ -14,9 +14,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Calendar, MoreHorizontal, Trash } from 'lucide-react'
 import { useState } from 'react'
-import { useGetAllDays } from '../api/useGetAllDays'
 import TodoItemSecondDropdown from './TodoItemSecondDropdown'
 import { useAppContext } from '@/AppProvider'
+import { useGetAllDays } from '@/resources/main/home/api/useGetAllDays'
 
 interface TodoItemDropdownProps {
   todoID: number

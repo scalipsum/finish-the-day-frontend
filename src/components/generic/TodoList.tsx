@@ -1,6 +1,6 @@
 import { useAppContext } from '@/AppProvider'
-import { useGetTodosByDayAndCategory } from '../api/useGetTodosByDayAndCategory'
-import TodoItem from './TodoItem'
+import TodoItem from '@/components/generic/TodoItem/TodoItem'
+import { useGetTodosByDayAndCategory } from '@/resources/main/home/api/useGetTodosByDayAndCategory'
 
 interface TodoListProps {
   categoryID: number | undefined

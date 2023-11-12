@@ -1,3 +1,4 @@
+import { useAppContext } from '@/AppProvider'
 import {
   Command,
   CommandGroup,
@@ -9,11 +10,9 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger
 } from '@/components/ui/dropdown-menu'
+import { useGetAllCategories } from '@/resources/main/home/api/useGetAllCategories'
 import { Tables } from '@/utils/types'
-import { useGetAllCategories } from '../api/useGetAllCategories'
 import { useParams } from 'react-router-dom'
-import { useAppContext } from '@/AppProvider'
-import { useState } from 'react'
 
 interface TodoItemSecondDropdownProps {
   todoID: number | undefined

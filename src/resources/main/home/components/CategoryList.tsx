@@ -1,5 +1,5 @@
+import CategoryCard from '@/components/generic/CategoryCard/CategoryCard'
 import { useGetAllCategories } from '../api/useGetAllCategories'
-import CategoryCard from './CategoryCard'
 
 const CategoryList = () => {
   const { categories } = useGetAllCategories()
