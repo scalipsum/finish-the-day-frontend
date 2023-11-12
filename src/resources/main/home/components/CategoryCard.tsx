@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Tables } from '@/utils/types'
 import TodoList from './TodoList'
 import { Button } from '@/components/ui/button'
-import { useMemo, useState } from 'react'
+import { FormEvent, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetDayByName } from '../api/useGetDayByName'
 import { useAppContext } from '@/AppProvider'
@@ -26,7 +26,8 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
 
   const [inputValue, setInputValue] = useState<string>('')
 
-  const handleAddTodo = async () => {
+  const handleAddTodo = async (e: FormEvent) => {
+    e.preventDefault()
     await supabase
       .from('todo')
       .insert({
@@ -53,7 +54,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
 
       {/* Content */}
       <CardContent>
-        <form>
+        <form onSubmit={handleAddTodo}>
           <div className="flex items-center justify-between space-x-2">
             <Input
               id="name"
@@ -66,7 +67,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
               variant="outline"
               className="py-6"
               onClick={handleAddTodo}
-              type="button"
+              type="submit"
               disabled={inputValue === ''}
             >
               Add

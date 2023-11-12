@@ -24,6 +24,7 @@ export const useGetTodosByDayAndCategory = ({
           .select('id, body, is_completed, day (name), category (name)')
           .eq('day_id', dayID ?? '')
           .eq('category_id', categoryID ?? '')
+          .order('created_at', { ascending: true })
         if (data) setTodos(data)
         if (error) return console.log('GetTodosByDayAndCategory', error)
       }
