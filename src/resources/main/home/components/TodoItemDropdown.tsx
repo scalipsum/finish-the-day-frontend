@@ -20,9 +20,10 @@ import { useAppContext } from '@/AppProvider'
 
 interface TodoItemDropdownProps {
   todoID: number
+  categoryID?: number
 }
 
-const TodoItemDropdown = ({ todoID }: TodoItemDropdownProps) => {
+const TodoItemDropdown = ({ todoID, categoryID }: TodoItemDropdownProps) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const { days } = useGetAllDays()
   const { supabase, triggerTodosRefetch } = useAppContext()
@@ -59,6 +60,8 @@ const TodoItemDropdown = ({ todoID }: TodoItemDropdownProps) => {
                       <TodoItemSecondDropdown
                         key={day.id}
                         day={day}
+                        categoryID={categoryID}
+                        todoID={todoID}
                         setMenuOpen={setMenuOpen}
                       />
                     ))}

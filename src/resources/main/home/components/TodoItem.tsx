@@ -8,9 +8,10 @@ import { useAppContext } from '@/AppProvider'
 
 interface TodoItemProps {
   todo: Tables<'todo'>
+  categoryID: number | undefined
 }
 
-const TodoItem = ({ todo }: TodoItemProps) => {
+const TodoItem = ({ todo, categoryID }: TodoItemProps) => {
   const { supabase } = useAppContext()
 
   const [isSelected, setIsSelected] = useState<CheckedState>(false)
@@ -53,7 +54,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           <TypographyP>{todo.body}</TypographyP>
         </div>
       </div>
-      <TodoItemDropdown todoID={todo.id ?? -1} />
+      <TodoItemDropdown todoID={todo.id ?? -1} categoryID={categoryID} />
     </div>
   )
 }

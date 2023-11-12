@@ -17,7 +17,7 @@ const TodoList = ({ categoryID, dayID }: TodoListProps) => {
   return (
     <div className="mt-4">
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} categoryID={categoryID} />
       ))}
     </div>
   )

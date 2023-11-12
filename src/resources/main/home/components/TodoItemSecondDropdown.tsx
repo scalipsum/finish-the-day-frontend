@@ -11,17 +11,39 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Tables } from '@/utils/types'
 import { useGetAllCategories } from '../api/useGetAllCategories'
+import { useParams } from 'react-router-dom'
+import { useAppContext } from '@/AppProvider'
+import { useState } from 'react'
 
 interface TodoItemSecondDropdownProps {
-  dayID: Tables<'day'>
+  todoID: number | undefined
+  day: Tables<'day'>
+  categoryID: number | undefined
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const TodoItemSecondDropdown = ({
+  todoID,
   day,
+  categoryID,
   setMenuOpen
 }: TodoItemSecondDropdownProps) => {
+  const { day: currentDayName } = useParams()
+  const { supabase, triggerTodosRefetch } = useAppContext()
   const { categories } = useGetAllCategories()
+
+  const handleTransferTodo = async (selectedCategoryID: string) => {
+    const { error } = await supabase
+      .from('todo')
+      .update({
+        day_id: day.id,
+        category_id: Number(selectedCategoryID)
+      })
+      .eq('id', todoID ?? -1)
+    if (error) return console.log('TransferTodoError', error)
+    setMenuOpen(false)
+    triggerTodosRefetch()
+  }
 
   return (
     <DropdownMenuSub>
@@ -32,17 +54,20 @@ const TodoItemSecondDropdown = ({
         <Command>
           <CommandList>
             <CommandGroup>
-              {categories.map((category) => (
-                <CommandItem
-                  key={category.id}
-                  value={category.name}
-                  onSelect={(value) => {
-                    setMenuOpen(false)
-                  }}
-                >
-                  {category.name}
-                </CommandItem>
-              ))}
+              {categories.map((category) => {
+                const currentCategory =
+                  day.name === currentDayName && categoryID === category.id
+                if (!currentCategory)
+                  return (
+                    <CommandItem
+                      key={category.id}
+                      value={String(category.id)}
+                      onSelect={(value) => handleTransferTodo(value)}
+                    >
+                      {category.name}
+                    </CommandItem>
+                  )
+              })}
             </CommandGroup>
           </CommandList>
         </Command>
