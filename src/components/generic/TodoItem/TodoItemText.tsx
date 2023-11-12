@@ -40,7 +40,7 @@ const TodoItemText = ({ todo, isCompleted }: TodoItemTextProps) => {
     <>
       {todoState === 'read' ? (
         <div
-          className={`${isCompleted ? 'line-through' : ''}`}
+          className={`py-3 ${isCompleted ? 'line-through' : ''}`}
           onClick={handleChangeTodoState}
         >
           <TypographyP>{inputValue ?? todo.body}</TypographyP>
@@ -50,7 +50,7 @@ const TodoItemText = ({ todo, isCompleted }: TodoItemTextProps) => {
           id="task-edit"
           placeholder="Enter your task..."
           autoComplete="off"
-          value={inputValue}
+          value={inputValue ?? ''}
           onChange={(e) => setInputValue(e.target.value)}
           onBlur={handleChangeTodoState}
           className="w-full border-none pl-0 dark:bg-slate-900"

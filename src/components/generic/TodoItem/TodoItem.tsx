@@ -21,10 +21,10 @@ const TodoItem = ({ todo, categoryID }: TodoItemProps) => {
   return (
     <div
       className={`mb-2 flex w-full flex-col items-start justify-between rounded-md border border-slate-800 ${
-        isCompleted ? 'bg-transparent' : 'bg-slate-900'
-      } pr-4 sm:flex-row sm:items-center`}
+        isCompleted ? 'bg-slate-925' : 'bg-transparent'
+      } duration-[175] pr-4 transition sm:flex-row sm:items-center`}
     >
-      <div className="flex flex-1 items-center space-x-3">
+      <div className="flex flex-1 items-center space-x-3 py-0">
         <TodoItemCheckbox
           todoID={todo.id}
           isCompleted={isCompleted}

@@ -16,6 +16,11 @@ module.exports = {
       }
     },
     extend: {
+      colors: {
+        slate: {
+          925: '#0c1221'
+        }
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },

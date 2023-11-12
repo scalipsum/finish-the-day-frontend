@@ -16,19 +16,17 @@ const TodoItemCheckbox = ({
   const { supabase } = useAppContext()
 
   const handleCompleteTodo = async () => {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('todo')
       .update({ is_completed: !isCompleted })
       .eq('id', todoID ?? -1)
-      .select()
     if (error) return console.log('UpdateTodoError', error)
-    if (data) return console.log(data)
   }
 
   return (
     <label
       htmlFor={String(todoID)}
-      className="mt-1 cursor-pointer py-3 pl-4"
+      className="mt-1 cursor-pointer pl-4"
       onClick={handleCompleteTodo}
     >
       <Checkbox
