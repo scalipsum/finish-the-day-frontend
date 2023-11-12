@@ -21,6 +21,10 @@ module.exports = {
           925: '#0c1221'
         }
       },
+      margin: {
+        '550px': '550px',
+        '-550px': '-550px'
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },

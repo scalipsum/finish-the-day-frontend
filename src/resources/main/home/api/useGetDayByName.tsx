@@ -21,6 +21,6 @@ export const useGetDayByName = ({ name }: UseGetDayByNameProps) => {
     }
     getDayByName()
     // eslint-disable-next-line
-  }, [])
+  }, [name])
   return { day }
 }
