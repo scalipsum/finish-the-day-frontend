@@ -1,5 +1,5 @@
 import { SupabaseClient } from '@supabase/supabase-js'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Database } from '../database.types'
 import { useRefetchData } from './utils/hooks/useRefetchData'
@@ -26,7 +26,18 @@ type AppProviderProps = {
 
 const AppProvider = ({ children, client }: AppProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] =
-    useState<AppContextType['isLoggedIn']>(true)
+    useState<AppContextType['isLoggedIn']>(false)
+
+  // Check Auth Session
+  useEffect(() => {
+    const getAuthSession = async () => {
+      const { data, error } = await client.auth.getSession()
+      if (error) return
+      if (data.session) setIsLoggedIn(true)
+    }
+    getAuthSession()
+    // eslint-disable-next-line
+  }, [])
 
   // Todos Refetching
   const { refetchData: refetchTodos, setRefetchData: setRefetchTodos } =

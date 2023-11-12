@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import TypographyH1 from '../ui/typography/TypographyH1'
 import { Button } from '../ui/button'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, UserMinus } from 'lucide-react'
 import { useGetAllDays } from '@/resources/main/home/api/useGetAllDays'
 import { useMemo } from 'react'
 import { useAppContext } from '@/AppProvider'
@@ -16,7 +16,7 @@ const MainLayout = () => {
   const location = useLocation()
   const { day } = useParams()
   const navigate = useNavigate()
-  const { triggerTodosRefetch } = useAppContext()
+  const { triggerTodosRefetch, supabase, setIsLoggedIn } = useAppContext()
 
   const isValidDay =
     day === 'monday' ||
@@ -52,10 +52,24 @@ const MainLayout = () => {
     return triggerTodosRefetch()
   }
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) return alert(error.message)
+    setIsLoggedIn(false)
+  }
+
   return (
-    <div className="light:bg-gray-200 min-h-screen w-screen dark:bg-slate-900">
+    <div className="light:bg-gray-200 relative min-h-screen w-screen dark:bg-slate-900">
       {/* Header */}
-      <div className="relative flex h-36 items-center justify-center gap-16 bg-indigo-900 lg:gap-32">
+      <div className="relative flex h-44 items-center justify-center gap-16 bg-indigo-900 lg:gap-32">
+        <Button
+          variant="outline"
+          size="icon"
+          className="duration-[175] absolute right-4 top-4 opacity-25 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent"
+          onClick={handleLogout}
+        >
+          <UserMinus className="h-4 w-4" />
+        </Button>
         <Button
           variant="outline"
           size="icon"
@@ -77,6 +91,7 @@ const MainLayout = () => {
 
       {/* Content */}
       <div className="px-8 py-6">
+        {/* Floating logout button*/}
         {(location.pathname === '/' || !isValidDay) && (
           <Navigate to="/monday" />
         )}
