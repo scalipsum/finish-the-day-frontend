@@ -9,14 +9,14 @@ type AppContextType = {
   isLoggedIn: boolean
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
   refetchTodos: boolean
-  setRefetchTodos: React.Dispatch<React.SetStateAction<boolean>>
+  triggerTodosRefetch: () => void
 }
 export const AppContext = React.createContext<AppContextType>({
   isLoggedIn: false,
   setIsLoggedIn: () => {},
   supabase: {} as SupabaseClient<Database, 'public'>,
   refetchTodos: true,
-  setRefetchTodos: () => {}
+  triggerTodosRefetch: () => {}
 })
 
 type AppProviderProps = {
@@ -28,8 +28,13 @@ const AppProvider = ({ children, client }: AppProviderProps) => {
   const [isLoggedIn, setIsLoggedIn] =
     useState<AppContextType['isLoggedIn']>(true)
 
+  // Todos Refetching
   const { refetchData: refetchTodos, setRefetchData: setRefetchTodos } =
     useRefetchData()
+  const triggerTodosRefetch = () => {
+    setRefetchTodos(true)
+    setTimeout(() => setRefetchTodos(false), 1000)
+  }
 
   return (
     <AppContext.Provider
@@ -38,7 +43,7 @@ const AppProvider = ({ children, client }: AppProviderProps) => {
         isLoggedIn,
         setIsLoggedIn,
         refetchTodos,
-        setRefetchTodos
+        triggerTodosRefetch
       }}
     >
       {children}

@@ -35,7 +35,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           <TypographyP>{todo.body}</TypographyP>
         </div>
       </div>
-      <TodoItemDropdown />
+      <TodoItemDropdown todoID={todo.id ?? -1} />
     </label>
   )
 }

@@ -16,10 +16,22 @@ import { Calendar, MoreHorizontal, Trash } from 'lucide-react'
 import { useState } from 'react'
 import { useGetAllDays } from '../api/useGetAllDays'
 import TodoItemSecondDropdown from './TodoItemSecondDropdown'
+import { useAppContext } from '@/AppProvider'
 
-const TodoItemDropdown = () => {
+interface TodoItemDropdownProps {
+  todoID: number
+}
+
+const TodoItemDropdown = ({ todoID }: TodoItemDropdownProps) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
   const { days } = useGetAllDays()
+  const { supabase, triggerTodosRefetch } = useAppContext()
+
+  const handleDeleteTodo = async () => {
+    const { error } = await supabase.from('todo').delete().eq('id', todoID)
+    if (error) return console.log('DeleteTodoError', error)
+    triggerTodosRefetch()
+  }
 
   return (
     <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
@@ -57,7 +69,7 @@ const TodoItemDropdown = () => {
           </DropdownMenuSub>
           {/* Delete Button */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="text-red-600">
+          <DropdownMenuItem className="text-red-600" onClick={handleDeleteTodo}>
             <Trash className="mr-2 h-4 w-4" />
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

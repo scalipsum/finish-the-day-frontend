@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Tables } from '@/utils/types'
 import TodoList from './TodoList'
 import { Button } from '@/components/ui/button'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useGetDayByName } from '../api/useGetDayByName'
 import { useAppContext } from '@/AppProvider'
@@ -22,7 +22,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
   const { day } = useParams()
   const { day: apiDay } = useGetDayByName({ name: day ?? '' })
   const dayID = useMemo(() => apiDay?.id, [apiDay])
-  const { supabase, setRefetchTodos } = useAppContext()
+  const { supabase, triggerTodosRefetch } = useAppContext()
 
   const [inputValue, setInputValue] = useState<string>('')
 
@@ -37,9 +37,7 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
       .single()
       .then(() => {
         setInputValue('')
-        // Refetch
-        setRefetchTodos(true)
-        setTimeout(() => setRefetchTodos(false), 1000)
+        triggerTodosRefetch()
       })
   }
 
