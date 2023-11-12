@@ -53,7 +53,7 @@ const TodoItemText = ({ todo, isCompleted }: TodoItemTextProps) => {
           value={inputValue ?? ''}
           onChange={(e) => setInputValue(e.target.value)}
           onBlur={handleChangeTodoState}
-          className="w-full border-none pl-0 dark:bg-slate-900"
+          className="my-0.5 w-full border-none pl-0 dark:bg-transparent"
           onKeyDown={(e) => {
             // @ts-expect-error ts-migrate(2531).
             if (e.key === 'Enter') e.target.blur()

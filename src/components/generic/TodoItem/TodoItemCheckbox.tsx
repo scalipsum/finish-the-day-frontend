@@ -7,15 +7,18 @@ interface TodoItemCheckboxProps {
   todoID: number | undefined
   isCompleted: CheckedState
   setIsCompleted: React.Dispatch<React.SetStateAction<CheckedState>>
+  handleStartAnimation: () => void
 }
 const TodoItemCheckbox = ({
   todoID,
   isCompleted,
-  setIsCompleted
+  setIsCompleted,
+  handleStartAnimation
 }: TodoItemCheckboxProps) => {
   const { supabase } = useAppContext()
 
   const handleCompleteTodo = async () => {
+    if (!isCompleted) handleStartAnimation()
     const { error } = await supabase
       .from('todo')
       .update({ is_completed: !isCompleted })
