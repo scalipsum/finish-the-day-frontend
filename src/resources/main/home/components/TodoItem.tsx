@@ -34,7 +34,7 @@ const TodoItem = ({ todo }: TodoItemProps) => {
   return (
     <div
       className={`mb-2 flex w-full flex-col items-start justify-between rounded-md border border-slate-800 ${
-        isSelected ? 'bg-slate-900' : 'bg-transparent'
+        isSelected ? 'bg-transparent' : 'bg-slate-900'
       } pr-4 sm:flex-row sm:items-center`}
     >
       <div className="flex items-center space-x-3">

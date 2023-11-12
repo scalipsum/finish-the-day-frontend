@@ -13,7 +13,7 @@ import { Tables } from '@/utils/types'
 import { useGetAllCategories } from '../api/useGetAllCategories'
 
 interface TodoItemSecondDropdownProps {
-  day: Tables<'day'>
+  dayID: Tables<'day'>
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
