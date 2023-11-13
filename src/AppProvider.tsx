@@ -35,7 +35,7 @@ const AppProvider = ({ children, client }: AppProviderProps) => {
     useState<AppContextType['isLoggedIn']>(false)
   const [currentUserDetails, setCurrentUserDetails] = useState<User | null>()
 
-  // Check Auth Session
+  // Check for Existing Auth Session
   useEffect(() => {
     const getAuthSession = async () => {
       const { data, error } = await client.auth.getSession()
