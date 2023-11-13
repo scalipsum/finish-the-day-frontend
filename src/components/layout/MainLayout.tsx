@@ -1,11 +1,12 @@
-import { Outlet, useNavigate } from 'react-router-dom'
-import PageHeader from './PageHeader'
-import { Button } from '../ui/button'
-import { isMobile } from 'react-device-detect'
 import { useAppContext } from '@/AppProvider'
+import { useMobile } from '@/utils/hooks/useMobile'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { Button } from '../ui/button'
+import PageHeader from './PageHeader'
 
 const MainLayout = () => {
   const { supabase, setIsLoggedIn } = useAppContext()
+  const { isMobile } = useMobile()
   const navigate = useNavigate()
 
   const handleLogout = async () => {

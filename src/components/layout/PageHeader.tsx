@@ -5,12 +5,13 @@ import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../ui/button'
 import TypographyH1 from '../ui/typography/TypographyH1'
-import { isMobile } from 'react-device-detect'
+import { useMobile } from '@/utils/hooks/useMobile'
 
 const PageHeader = () => {
   const { day } = useParams()
   const navigate = useNavigate()
   const { triggerTodosRefetch, supabase, setIsLoggedIn } = useAppContext()
+  const { isMobile } = useMobile()
 
   const { days } = useGetAllDays()
   const daysArray = useMemo(() => days.map((day) => day.name), [days])
