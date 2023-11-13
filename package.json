@@ -3,8 +3,8 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "npm run generate && vite",
+    "build": "tsc && npm run generate && vite build",
     "preview": "vite preview",
     "lint": "eslint src --max-warnings=0",
     "types": "tsc --project tsconfig.json --noEmit",
