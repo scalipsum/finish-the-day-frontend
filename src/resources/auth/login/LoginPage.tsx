@@ -36,7 +36,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
+    <div className="flex h-screen w-full items-center justify-center px-4">
       <Card>
         <CardHeader className="mb-3 space-y-2">
           <CardTitle className="text-2xl">Login to continue</CardTitle>

@@ -1,22 +1,9 @@
-import {
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams
-} from 'react-router-dom'
-import TypographyH1 from '../ui/typography/TypographyH1'
-import { Button } from '../ui/button'
-import { ChevronLeft, ChevronRight, UserMinus } from 'lucide-react'
-import { useGetAllDays } from '@/resources/main/home/api/useGetAllDays'
-import { useMemo } from 'react'
-import { useAppContext } from '@/AppProvider'
+import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
+import PageHeader from './PageHeader'
 
 const MainLayout = () => {
   const location = useLocation()
   const { day } = useParams()
-  const navigate = useNavigate()
-  const { triggerTodosRefetch, supabase, setIsLoggedIn } = useAppContext()
 
   const isValidDay =
     day === 'monday' ||
@@ -27,68 +14,9 @@ const MainLayout = () => {
     day === 'saturday' ||
     day === 'sunday'
 
-  const { days } = useGetAllDays()
-  const daysArray = useMemo(() => days.map((day) => day.name), [days])
-  const currentDayIndex = useMemo(
-    () => daysArray.indexOf(day),
-    [daysArray, day]
-  )
-
-  const goToPreviousDay = () => {
-    if (currentDayIndex === 0) {
-      navigate(`/${daysArray[daysArray.length - 1]}`)
-      return triggerTodosRefetch()
-    }
-    navigate(`/${daysArray[currentDayIndex - 1]}`)
-    return triggerTodosRefetch()
-  }
-
-  const goToNextDay = () => {
-    if (currentDayIndex === daysArray.length - 1) {
-      navigate(`/${daysArray[0]}`)
-      return triggerTodosRefetch()
-    }
-    navigate(`/${daysArray[currentDayIndex + 1]}`)
-    return triggerTodosRefetch()
-  }
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) return alert(error.message)
-    setIsLoggedIn(false)
-    navigate(0)
-  }
-
   return (
-    <div className="light:bg-gray-200 relative min-h-screen w-screen dark:bg-slate-900">
-      {/* Header */}
-      <div className="relative flex h-44 items-center justify-center gap-16 bg-indigo-900 lg:gap-32">
-        <Button
-          variant="outline"
-          size="icon"
-          className="duration-[175] absolute right-4 top-4 opacity-25 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent"
-          onClick={handleLogout}
-        >
-          <UserMinus className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="duration-[175] absolute -ml-80 mt-3 opacity-25 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent md:ml-[-550px]"
-          onClick={goToPreviousDay}
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <TypographyH1>{day}</TypographyH1>
-        <Button
-          variant="outline"
-          size="icon"
-          className="duration-[175] absolute ml-80 mt-3 opacity-30 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent md:ml-[550px]"
-          onClick={goToNextDay}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
+    <div className="light:bg-gray-200 relative min-h-screen w-screen pb-8 dark:bg-slate-900">
+      <PageHeader />
 
       {/* Content */}
       <div className="px-8 py-6">
