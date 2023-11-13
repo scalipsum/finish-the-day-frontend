@@ -66,18 +66,18 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: 'days_categories_category_id_fkey'
-            columns: ['category_id']
+            foreignKeyName: "days_categories_category_id_fkey"
+            columns: ["category_id"]
             isOneToOne: false
-            referencedRelation: 'category'
-            referencedColumns: ['id']
+            referencedRelation: "category"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: 'days_categories_day_id_fkey'
-            columns: ['day_id']
+            foreignKeyName: "days_categories_day_id_fkey"
+            columns: ["day_id"]
             isOneToOne: false
-            referencedRelation: 'day'
-            referencedColumns: ['id']
+            referencedRelation: "day"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -114,25 +114,25 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: 'fk_user'
-            columns: ['user_id']
+            foreignKeyName: "fk_user"
+            columns: ["user_id"]
             isOneToOne: false
-            referencedRelation: 'users'
-            referencedColumns: ['id']
+            referencedRelation: "users"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: 'todo_category_id_fkey'
-            columns: ['category_id']
+            foreignKeyName: "todo_category_id_fkey"
+            columns: ["category_id"]
             isOneToOne: false
-            referencedRelation: 'category'
-            referencedColumns: ['id']
+            referencedRelation: "category"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: 'todo_day_id_fkey'
-            columns: ['day_id']
+            foreignKeyName: "todo_day_id_fkey"
+            columns: ["day_id"]
             isOneToOne: false
-            referencedRelation: 'day'
-            referencedColumns: ['id']
+            referencedRelation: "day"
+            referencedColumns: ["id"]
           }
         ]
       }
