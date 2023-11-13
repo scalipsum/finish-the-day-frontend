@@ -2,39 +2,32 @@ import { useAppContext } from '@/AppProvider'
 import { Tables } from '@/utils/types'
 import { useEffect, useState } from 'react'
 
-interface UseGetTodosByDayAndCategoryProps {
+interface UseGetTodosByDayProps {
   dayID: number | undefined
-  categoryID: number | undefined
   userID: string | undefined
-  refetch: boolean
+  // refetch: boolean
 }
 
-export const useGetTodosByDayAndCategory = ({
-  dayID,
-  categoryID,
-  userID,
-  refetch
-}: UseGetTodosByDayAndCategoryProps) => {
+export const useGetTodosByDay = ({ dayID, userID }: UseGetTodosByDayProps) => {
   const { supabase } = useAppContext()
   const [todos, setTodos] = useState<Tables<'todo'>[]>([])
 
   useEffect(() => {
     const getData = async () => {
-      if (dayID && categoryID && refetch) {
+      if (dayID) {
         const { data, error } = await supabase
           .from('todo')
-          .select('id, body, is_completed, day (name), category (name)')
+          .select('*')
           .eq('day_id', dayID ?? '')
-          .eq('category_id', categoryID ?? '')
           .eq('user_id', userID ?? '')
           .order('created_at', { ascending: true })
         if (data) setTodos(data)
-        if (error) return console.log('GetTodosByDayAndCategory', error)
+        if (error) return console.log('GetTodosByDay', error)
       }
     }
     getData()
     // eslint-disable-next-line
-  }, [dayID, categoryID, userID, refetch])
+  }, [dayID, userID])
 
   return { todos }
 }
