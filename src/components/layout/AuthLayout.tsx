@@ -1,13 +1,11 @@
-import { useMemo } from 'react'
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+interface AuthLayoutProps {
+  children: JSX.Element
+}
 
-const AuthLayout = () => {
-  const location = useLocation()
-  const path = useMemo(() => location.pathname, [location])
+const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="light:bg-gray-200 min-h-screen w-screen dark:bg-slate-900">
-      {(path === '/auth' || path === '/auth/') && <Navigate to="/auth/login" />}
-      <Outlet />
+      {children}
     </div>
   )
 }

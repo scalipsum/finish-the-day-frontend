@@ -1,8 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-
 import AuthLayout from '@/components/layout/AuthLayout'
 import AuthRoute from '@/utils/routes/AuthRoute'
-
 import LoginPage from './login/LoginPage'
 import RegisterPage from './register/RegisterPage'
 

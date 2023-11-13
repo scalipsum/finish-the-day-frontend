@@ -9,7 +9,7 @@ export const useLogout = () => {
     const { error } = await supabase.auth.signOut()
     if (error) return alert(error.message)
     setIsLoggedIn(false)
-    navigate(0)
+    navigate('/')
   }
 
   return { handleLogout }

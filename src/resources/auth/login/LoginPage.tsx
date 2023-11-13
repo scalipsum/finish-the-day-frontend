@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import TypographyP from '@/components/ui/typography/TypographyP'
+import { currentCalendarDay } from '@/utils'
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -35,6 +36,7 @@ const LoginPage = () => {
     setCurrentUserDetails(data.user)
     setIsLoggedIn(true)
     triggerTodosRefetch()
+    navigate(`/${currentCalendarDay}`)
   }
 
   return (

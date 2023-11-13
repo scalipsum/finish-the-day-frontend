@@ -1,6 +1,8 @@
-import { Navigate, useLocation } from 'react-router-dom'
-
 import { useAppContext } from '@/AppProvider'
+import { Navigate, useParams } from 'react-router-dom'
+import { currentCalendarDay } from '..'
+import LoginPage from '@/resources/auth/login/LoginPage'
+import AuthLayout from '@/components/layout/AuthLayout'
 
 interface ProtectedRouteProps {
   children: JSX.Element
@@ -8,11 +10,24 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { isLoggedIn } = useAppContext()
-  const location = useLocation()
+  const { day } = useParams()
 
-  if (!isLoggedIn) {
-    return <Navigate to="/auth/login" replace state={{ from: location }} />
-  }
+  const isValidDay =
+    day === 'monday' ||
+    day === 'tuesday' ||
+    day === 'wednesday' ||
+    day === 'thursday' ||
+    day === 'friday' ||
+    day === 'saturday' ||
+    day === 'sunday'
+
+  if (!isLoggedIn)
+    return (
+      <AuthLayout>
+        <LoginPage />
+      </AuthLayout>
+    )
+  if (!isValidDay) return <Navigate to={`/${currentCalendarDay}`} />
   return children
 }
 

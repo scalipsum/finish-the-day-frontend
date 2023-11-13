@@ -1,6 +1,6 @@
 import { useAppContext } from '@/AppProvider'
-import dayjs from 'dayjs'
 import { Navigate, useLocation } from 'react-router-dom'
+import { currentCalendarDay } from '..'
 
 interface AuthRouteProps {
   children: JSX.Element
@@ -9,7 +9,6 @@ interface AuthRouteProps {
 const AuthRoute = ({ children }: AuthRouteProps) => {
   const { isLoggedIn } = useAppContext()
   const location = useLocation()
-  const currentCalendarDay = dayjs().format('dddd').toLowerCase()
 
   if (isLoggedIn) {
     return (
