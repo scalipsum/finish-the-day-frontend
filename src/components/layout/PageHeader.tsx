@@ -46,7 +46,7 @@ const PageHeader = () => {
   }
 
   return (
-    <div className="relative flex h-32 items-center justify-center gap-16 bg-indigo-900 sm:h-44 lg:gap-32">
+    <div className="relative flex h-28 items-center justify-center gap-16 bg-indigo-900 sm:h-44 lg:gap-32">
       {/* Logout */}
       {!isMobile && (
         <Button

@@ -19,6 +19,9 @@ module.exports = {
       colors: {
         slate: {
           925: '#0c1221'
+        },
+        indigo: {
+          925: '#2d2c66'
         }
       },
       margin: {
