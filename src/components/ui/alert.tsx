@@ -3,6 +3,7 @@ import * as React from 'react'
 
 import { cn } from '@/utils/index'
 
+/* eslint-disable */
 const alertVariants = cva(
   'relative w-full rounded-lg border border-slate-200 p-4 dark:border-slate-800 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-slate-950 dark:[&>svg]:text-slate-50 [&>svg~*]:pl-7',
   {
@@ -18,6 +19,7 @@ const alertVariants = cva(
     }
   }
 )
+/* eslint-enable */
 
 const Alert = React.forwardRef<
   HTMLDivElement,

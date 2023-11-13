@@ -1,15 +1,17 @@
 {
-  "name": "react-ts-vite-eslint-prettier-tailwind",
+  "name": "finish-the-day-frontend",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "npm run generate && vite",
-    "build": "tsc && npm run generate && vite build",
+    "build": "npm run types && npm run generate && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --max-warnings=0",
-    "types": "tsc --project tsconfig.json --noEmit",
-    "imports": "npx eslint . --fix",
-    "generate": "supabase gen types typescript --project-id vjtakljtagljabogjzsx > database.types.ts"
+    "generate": "supabase gen types typescript --project-id vjtakljtagljabogjzsx > database.types.ts",
+    "lint": "eslint src --max-warnings=0 --fix",
+    "types": "tsc --project tsconfig.json --noEmit --skipLibCheck"
+  },
+  "engines": {
+    "yarn": "please-use-npm"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",

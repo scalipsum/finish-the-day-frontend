@@ -25,6 +25,9 @@ module.exports = {
         '550px': '550px',
         '-550px': '-550px'
       },
+      transitionDuration: {
+        175: '175ms'
+      },
       keyframes: {
         'accordion-down': {
           from: { height: 0 },
