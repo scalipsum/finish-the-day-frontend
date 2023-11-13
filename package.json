@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npm run generate && vite",
-    "build": "npm run types && npm run generate && vite build",
+    "build": "npm run types && vite build",
     "preview": "vite preview",
     "generate": "supabase gen types typescript --project-id vjtakljtagljabogjzsx > database.types.ts",
     "lint": "eslint src --max-warnings=0 --fix",
