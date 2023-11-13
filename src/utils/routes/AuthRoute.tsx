@@ -1,18 +1,24 @@
-import { Navigate, useLocation } from 'react-router-dom'
-
+import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { useAppContext } from '@/AppProvider'
+import dayjs from 'dayjs'
 
 interface AuthRouteProps {
   children: JSX.Element
-  exceptions?: string[]
 }
 
-const AuthRoute = ({ children, exceptions = [] }: AuthRouteProps) => {
+const AuthRoute = ({ children }: AuthRouteProps) => {
   const { isLoggedIn } = useAppContext()
   const location = useLocation()
+  const currentCalendarDay = dayjs().format('dddd').toLowerCase()
 
-  if (isLoggedIn && !exceptions.includes(location.pathname)) {
-    return <Navigate to="/" replace state={{ from: location }} />
+  if (isLoggedIn) {
+    return (
+      <Navigate
+        to={`/${currentCalendarDay}`}
+        replace
+        state={{ from: location }}
+      />
+    )
   }
 
   return children
