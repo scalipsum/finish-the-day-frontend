@@ -1,5 +1,5 @@
 interface AuthLayoutProps {
-  children: JSX.Element
+  children?: JSX.Element
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {

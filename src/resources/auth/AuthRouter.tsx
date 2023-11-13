@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import AuthLayout from '@/components/layout/AuthLayout'
-import AuthRoute from '@/utils/routes/AuthRoute'
 import LoginPage from './login/LoginPage'
 import RegisterPage from './register/RegisterPage'
 
@@ -8,16 +7,21 @@ const AuthRouter = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/login"
         element={
-          <AuthRoute>
-            <AuthLayout />
-          </AuthRoute>
+          <AuthLayout>
+            <LoginPage />
+          </AuthLayout>
         }
-      >
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Route>
+      />
+      <Route
+        path="/register"
+        element={
+          <AuthLayout>
+            <RegisterPage />
+          </AuthLayout>
+        }
+      />
     </Routes>
   )
 }
