@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { ToastAction } from '@/components/ui/toast'
 import TypographyP from '@/components/ui/typography/TypographyP'
 import { useToast } from '@/components/ui/use-toast'
 import { FormEvent, useState } from 'react'
