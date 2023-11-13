@@ -5,7 +5,7 @@ import TodoItemCheckbox from './TodoItemCheckbox'
 import TodoItemDropdown from './TodoItemDropdown'
 import TodoItemText from './TodoItemText'
 import { animated, easings, useSpring } from '@react-spring/web'
-import { isMobile } from 'react-device-detect'
+import { useMobile } from '@/utils/hooks/useMobile'
 
 interface TodoItemProps {
   todo: Tables<'todo'>
@@ -14,6 +14,7 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo, categoryID }: TodoItemProps) => {
   const [isCompleted, setIsCompleted] = useState<CheckedState>(false)
+  const { isMobile } = useMobile()
 
   useEffect(() => {
     if (typeof todo.is_completed === 'boolean')

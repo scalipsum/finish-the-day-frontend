@@ -4,6 +4,7 @@ import AuthLayout from '@/components/layout/AuthLayout'
 import AuthRoute from '@/utils/routes/AuthRoute'
 
 import LoginPage from './login/LoginPage'
+import RegisterPage from './register/RegisterPage'
 
 const AuthRouter = () => {
   return (
@@ -17,6 +18,7 @@ const AuthRouter = () => {
         }
       >
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
     </Routes>
   )

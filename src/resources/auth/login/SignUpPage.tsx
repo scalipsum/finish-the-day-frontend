@@ -10,14 +10,12 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import TypographyP from '@/components/ui/typography/TypographyP'
 import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+
   const {
     supabase,
     setIsLoggedIn,
@@ -39,11 +37,11 @@ const LoginPage = () => {
 
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
-      <Card className="w-full sm:w-96">
+      <Card>
         <CardHeader className="mb-3 space-y-2">
-          <CardTitle className="text-2xl">Login to continue</CardTitle>
+          <CardTitle className="text-2xl">Register an account</CardTitle>
           <CardDescription>
-            Enter your details below to enter into your account.
+            Create an account so you can start organizing your day.
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
@@ -69,21 +67,10 @@ const LoginPage = () => {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col">
+          <CardFooter>
             <Button className="w-full" type="submit">
               Enter
             </Button>
-            <div className="-mb-2 ml-6 mt-2 flex items-center">
-              <TypographyP>or</TypographyP>
-              <Button
-                variant="link"
-                className="-ml-2 py-0 underline dark:text-slate-600 hover:dark:text-slate-50"
-                type="button"
-                onClick={() => navigate('/auth/register')}
-              >
-                Create an account
-              </Button>
-            </div>
           </CardFooter>
         </form>
       </Card>

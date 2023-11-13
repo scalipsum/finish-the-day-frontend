@@ -4,6 +4,7 @@ import { Database } from '../database.types'
 import AppProvider from './AppProvider'
 import AppRouter from './AppRouter'
 import { ThemeProvider } from './components/ui/ThemeProvider'
+import { Toaster } from './components/ui/toaster'
 
 const App = () => {
   const supabase = createClient<Database>(
@@ -15,6 +16,7 @@ const App = () => {
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <AppProvider client={supabase}>
         <AppRouter />
+        <Toaster />
       </AppProvider>
     </ThemeProvider>
   )

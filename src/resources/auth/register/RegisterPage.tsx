@@ -10,43 +10,42 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ToastAction } from '@/components/ui/toast'
 import TypographyP from '@/components/ui/typography/TypographyP'
+import { useToast } from '@/components/ui/use-toast'
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
-  const {
-    supabase,
-    setIsLoggedIn,
-    triggerTodosRefetch,
-    setCurrentUserDetails
-  } = useAppContext()
 
-  const handleLogin = async (e: FormEvent) => {
+  const { toast } = useToast()
+  const { supabase } = useAppContext()
+
+  const handleRegister = async (e: FormEvent) => {
     e.preventDefault()
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password
     })
     if (error) return alert(error.message)
-    setCurrentUserDetails(data.user)
-    setIsLoggedIn(true)
-    triggerTodosRefetch()
+    toast({
+      title: "Verify your email. We've sent you a link!"
+    })
   }
 
   return (
     <div className="flex h-screen w-full items-center justify-center px-4">
       <Card className="w-full sm:w-96">
         <CardHeader className="mb-3 space-y-2">
-          <CardTitle className="text-2xl">Login to continue</CardTitle>
+          <CardTitle className="text-2xl">Create an account</CardTitle>
           <CardDescription>
-            Enter your details below to enter into your account.
+            Register so you can start organizing your day.
           </CardDescription>
         </CardHeader>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -73,15 +72,15 @@ const LoginPage = () => {
             <Button className="w-full" type="submit">
               Enter
             </Button>
-            <div className="-mb-2 ml-6 mt-2 flex items-center">
-              <TypographyP>or</TypographyP>
+            <div className="-mb-2 ml-6 mt-3 flex items-center">
+              <TypographyP>Have an account?</TypographyP>
               <Button
                 variant="link"
                 className="-ml-2 py-0 underline dark:text-slate-600 hover:dark:text-slate-50"
                 type="button"
-                onClick={() => navigate('/auth/register')}
+                onClick={() => navigate('/auth/login')}
               >
-                Create an account
+                Login
               </Button>
             </div>
           </CardFooter>
@@ -91,4 +90,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
