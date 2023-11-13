@@ -35,6 +35,7 @@ const AppProvider = ({ children, client }: AppProviderProps) => {
     useState<AppContextType['isLoggedIn']>(false)
   const [currentUserDetails, setCurrentUserDetails] = useState<User | null>()
 
+  // Push deployment
   // Check for Existing Auth Session
   useEffect(() => {
     const getAuthSession = async () => {
