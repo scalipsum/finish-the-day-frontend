@@ -1,6 +1,6 @@
-import { Navigate, useLocation, useParams } from 'react-router-dom'
 import { useAppContext } from '@/AppProvider'
 import dayjs from 'dayjs'
+import { Navigate, useLocation } from 'react-router-dom'
 
 interface AuthRouteProps {
   children: JSX.Element
