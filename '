@@ -34,12 +34,9 @@ const TodoItemSecondDropdown = ({
   const handleTransferTodo = async (selectedCategoryID: string | undefined) => {
     // Transfer to same category - different day
     if (!selectedCategoryID) {
-      const { error } = await supabase
-        .from('todo')
-        .update({
-          day_id: day.id
-        })
-        .eq('id', todoID ?? -1)
+      const { error } = await supabase.from('todo').update({
+        day_id: day.id
+      })
       if (error) return console.log('TransferTodoError', error)
       setMenuOpen(false)
       return triggerTodosRefetch()
@@ -66,7 +63,6 @@ const TodoItemSecondDropdown = ({
         <CommandItem
           value={day.name}
           onSelect={() => handleTransferTodo(undefined)}
-          className="cursor-pointer"
         >
           {day.name}
         </CommandItem>
