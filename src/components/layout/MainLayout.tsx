@@ -19,7 +19,7 @@ const MainLayout = () => {
       <PageHeader />
 
       {/* Content */}
-      <div className="px-8 py-6">
+      <div className="px-2 py-6 sm:px-8">
         {/* Floating logout button*/}
         {(location.pathname === '/' || !isValidDay) && (
           <Navigate to="/monday" />

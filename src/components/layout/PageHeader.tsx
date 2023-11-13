@@ -44,12 +44,12 @@ const PageHeader = () => {
   }
 
   return (
-    <div className="relative flex h-44 items-center justify-center gap-16 bg-indigo-900 lg:gap-32">
+    <div className="relative flex h-32 items-center justify-center gap-16 bg-indigo-900 sm:h-44 lg:gap-32">
       {/* Logout */}
       <Button
         variant="outline"
         size="icon"
-        className="duration-[175] absolute right-4 top-4 opacity-25 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent"
+        className="duration-[175] absolute right-2 top-2 opacity-25 transition-all hover:opacity-80 dark:border-slate-200 dark:bg-transparent dark:text-slate-200 dark:hover:bg-transparent sm:right-4 sm:top-4"
         onClick={handleLogout}
       >
         <UserMinus className="h-4 w-4" />
