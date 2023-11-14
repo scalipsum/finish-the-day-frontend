@@ -7,6 +7,7 @@ const GoogleButton = () => {
   const {
     supabase,
     setCurrentUserDetails,
+    isLoggedIn,
     setIsLoggedIn,
     triggerTodosRefetch
   } = useAppContext()
@@ -28,18 +29,20 @@ const GoogleButton = () => {
   }
 
   useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://accounts.google.com/gsi/client'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
-    // @ts-expect-error-next-line
-    window.handleSignInWithGoogle = handleSignInWithGoogle
-    return () => {
-      document.body.removeChild(script)
+    if (!isLoggedIn) {
+      const script = document.createElement('script')
+      script.src = 'https://accounts.google.com/gsi/client'
+      script.async = true
+      script.defer = true
+      document.body.appendChild(script)
+      // @ts-expect-error-next-line
+      window.handleSignInWithGoogle = handleSignInWithGoogle
+      return () => {
+        document.body.removeChild(script)
+      }
     }
     // eslint-disable-next-line
-  }, [])
+  }, [isLoggedIn])
   return (
     <>
       <div
